@@ -1,0 +1,28 @@
+{
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+  "coc.preferences.formatOnSaveFiletypes": ["vue", "javascript", "typescript", "typescriptreact", "json", "javascriptreact", "html", "css"],
+
+  "eslint.filetypes": ["vue", "javascript", "typescript", "typescriptreact", "javascriptreact"],
+  "diagnostic.errorSign": "•",
+  "diagnostic.warningSign": "•",
+  "diagnostic.infoSign": "•",
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    {"language":  "vue",  "autoFix":  true  },
+    "javascript",
+   "javascriptreact",
+    {"language":  "typescript",  "autoFix":  true  },
+    {"language":  "typescriptreact",  "autoFix":  true  }
+  ],
+  "html.format.enable": true,
+  "vetur.format.enable": true ,
+  "vetur.format.defaultFormatter.ts": "prettier",
+  "vetur.format.defaultFormatter.js": "prettier",
+  "vetur.format.defaultFormatter.html": "prettyhtml",
+  "vetur.format.defaultFormatter.scss": "prettier",
+  "docker.enable": true,
+  //"vetur.validation.style": false,
+  //"vetur.validation.script": false,
+  //"vetur.validation.template": false,
+}
