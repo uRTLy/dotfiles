@@ -1,3 +1,5 @@
+
+
 "" PLUGINS
 call plug#begin('~/.vim/plugged')
 
@@ -144,12 +146,12 @@ let g:session_default_to_last = 1
 set sessionoptions-=options
 
 """"""""fzf"""""""""
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+
 nnoremap <silent> <c-f> :Rg<cr>
-nnoremap <silent> <Leader>f :Files<cr>
 nnoremap <silent> <c-g> :GFiles<cr>
-nnoremap <silent> <c-a> :Buffers<cr>
-nnoremap <silent> <c-s> :Lines<cr>
-nnoremap <silent> <c-d> :Windows<cr>
+nnoremap <silent> <c-d> :Lines<cr>
+nnoremap <silent> <c-a> :Files<cr>
 
 
 """"""""GIT FLOW (fugitive)"""""""""
@@ -238,9 +240,6 @@ function! s:check_back_space() abort
 
     "close preview window when completion is done.
     autocmd! completedone * if pumvisible() == 0 | pclose | endif
-
-
-let $fzf_default_command = 'rg --files --no-ignore-vcs --hidden'
 
 " aus
 au bufreadpost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
