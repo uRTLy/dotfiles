@@ -7,6 +7,8 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': './install.sh'}
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
+Plug 'mxw/vim-jsx'
+Plug 'suy/vim-context-commentstring'
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
@@ -32,6 +34,7 @@ call plug#end()
 
 let mapleader = ","
 
+" let g:coc_node_path = '~/.nvm/
 "THEME
 set background=dark
 set notermguicolors
@@ -163,6 +166,7 @@ nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
 
 let g:coc_global_extensions = [
   \ 'coc-json',
+  \ 'coc-python',
   \ 'coc-docker',
   \ 'coc-yaml',
   \ 'coc-yaml',
@@ -203,7 +207,13 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use K for show documentation in preview window
+" pasting
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+
+
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
@@ -246,3 +256,19 @@ function! SetupCommandAbbrs(from, to)
 " VUE 
  autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 
+" commenting 
+let g:context#commentstring#table['javascript.jsx'] = {
+			\ 'jsComment' : '// %s',
+			\ 'jsImport' : '// %s',
+			\ 'jsxStatment' : '// %s',
+			\ 'jsxRegion' : '{/*%s*/}',
+			\ 'jsxTag' : '{/*%s*/}',
+			\}
+
+let g:context#commentstring#table['typescript.jsx'] = {
+			\ 'jsComment' : '// %s',
+			\ 'jsImport' : '// %s',
+			\ 'jsxStatment' : '// %s',
+			\ 'jsxRegion' : '{/*%s*/}',
+			\ 'jsxTag' : '{/*%s*/}',
+			\}
