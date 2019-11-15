@@ -11,7 +11,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
 Plug 'suy/vim-context-commentstring'
-
+Plug 'sillybun/vim-repl'
 Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
 Plug 'tpope/vim-vinegar'
@@ -75,6 +75,19 @@ cnoremap <C-h> <Left>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
 cnoremap <C-l> <Right>
+
+
+if has("mac")
+  set nocursorline
+
+  if exists("+relativenumber")
+    set norelativenumber
+  endif
+
+  set foldlevel=0
+  set foldmethod=manual
+endif
+
 
 " move a line of text using ALT+[jk], indent with ALT+[hl]
 nnoremap <M-j> :m+<CR>==
@@ -173,7 +186,6 @@ let g:coc_global_extensions = [
   \ 'coc-yaml',
   \ 'coc-yaml',
   \ 'coc-html',
-  \ 'coc-vetur',
   \ 'coc-css',
   \ 'coc-tsserver',
   \ 'coc-stylelint',
@@ -181,7 +193,6 @@ let g:coc_global_extensions = [
   \ 'coc-highlight',
   \ 'coc-emmet',
   \ 'coc-snippets',
-  \ 'coc-git',
   \ 'coc-tslint-plugin',
   \ 'coc-eslint'
   \ ]
@@ -254,6 +265,11 @@ function! SetupCommandAbbrs(from, to)
 
 " VUE 
  autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
+
+
+autocmd BufRead,BufNewFile *.{jsx} setlocal filetype=javascript.jsx
+autocmd BufRead,BufNewFile *.{tsx} setlocal filetype=typescript.jsx
+
 
 " commenting 
 let g:context#commentstring#table['javascript.jsx'] = {
