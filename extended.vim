@@ -1,5 +1,3 @@
-
-
 "" PLUGINS
 call plug#begin('~/.vim/plugged')
 
@@ -12,12 +10,16 @@ Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
 Plug 'suy/vim-context-commentstring'
 Plug 'sillybun/vim-repl'
+
 Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-apathy'
+
+
+Plug 'dunstontc/vim-vscode-theme'
 
 "" THEME
 Plug 'tomasiser/vim-code-dark'
@@ -26,21 +28,25 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 
 " Sessions
 Plug 'xolox/vim-misc'
-
 Plug 'xolox/vim-session'
 
 call plug#end()
 
 let mapleader = ","
 
-" let g:coc_node_path = '~/.nvm/
+let g:airline_theme = 'codedark'
 "THEME
 set background=dark
 set notermguicolors
-colorscheme codedark
+
+colorscheme dracula 
+set guifont=Menlo:h12
+
 
 set number
 set relativenumber
@@ -154,9 +160,13 @@ nmap <CR> o<Esc>
 let g:session_autoload = 'yes'
 let g:session_autosave = 'yes'
 let g:session_autosave_to = 'default'
+let g:session_autosave_periodic = 1 
+let g:session_default_to_last = 1
 let g:session_verbose_messages = 0
+:let g:session_persist_colors = 0
 let g:session_default_to_last = 1
 set sessionoptions-=options
+
 
 """"""""fzf"""""""""
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
@@ -165,6 +175,8 @@ nnoremap <silent> <c-f> :Rg<cr>
 nnoremap <silent> <c-g> :GFiles<cr>
 nnoremap <silent> <c-d> :Lines<cr>
 nnoremap <silent> <c-a> :Files<cr>
+nnoremap <silent> <c-p> :Commands<cr> 
+
 
 
 """"""""GIT FLOW (fugitive)"""""""""
@@ -194,7 +206,8 @@ let g:coc_global_extensions = [
   \ 'coc-emmet',
   \ 'coc-snippets',
   \ 'coc-tslint-plugin',
-  \ 'coc-eslint'
+  \ 'coc-eslint',
+  \ 'coc-vetur'
   \ ]
 
 inoremap <silent><expr> <TAB>
@@ -263,10 +276,8 @@ function! SetupCommandAbbrs(from, to)
               \ .'? ("'.a:to.'") : ("'.a:from.'"))'
   endfunction
 
-" VUE 
- autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
-
-
+" FILETYPES 
+autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 autocmd BufRead,BufNewFile *.{jsx} setlocal filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.{tsx} setlocal filetype=typescript.jsx
 
@@ -287,3 +298,13 @@ let g:context#commentstring#table['typescript.jsx'] = {
 			\ 'jsxRegion' : '{/*%s*/}',
 			\ 'jsxTag' : '{/*%s*/}',
 			\}
+
+
+let g:context#commentstring#table['vue'] = {
+			\ 'jsComment' : '// %s',
+			\ 'jsImport' : '// %s',
+			\ 'jsxStatment' : '// %s',
+			\ 'jsxRegion' : '{/*%s*/}',
+			\ 'jsxTag' : '{/*%s*/}',
+			\}
+
