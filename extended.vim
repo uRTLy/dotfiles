@@ -1,3 +1,4 @@
+
 "" PLUGINS
 call plug#begin('~/.vim/plugged')
 
@@ -29,6 +30,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'NLKNguyen/papercolor-theme'
 
 
 " Sessions
@@ -41,11 +43,12 @@ let mapleader = ","
 
 let g:airline_theme = 'codedark'
 "THEME
-set background=dark
+set background=light
 set notermguicolors
 
-colorscheme dracula 
-set guifont=Menlo:h12
+set t_Co=256
+colorscheme PaperColor 
+set guifont=Menlo:h13
 
 
 set number
