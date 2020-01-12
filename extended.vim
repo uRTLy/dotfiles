@@ -1,4 +1,3 @@
-
 "" PLUGINS
 call plug#begin('~/.vim/plugged')
 
@@ -42,14 +41,23 @@ call plug#end()
 let mapleader = ","
 
 let g:airline_theme = 'codedark'
+
+" NETRW overrides
+"
+" let g:netrw_localrmdir='rm -r'
+let g:netrw_localrmdir='mv PATH_TO_YOUR/Trash'
+let g:netrw_localrmdir_cmd='mv PATH_TO_YOUR/Trash'
+
+
 "THEME
 set background=light
-set notermguicolors
+set termguicolors
 
 set t_Co=256
 colorscheme PaperColor 
 set guifont=Menlo:h13
 
+set mouse=a
 
 set number
 set relativenumber
@@ -74,6 +82,23 @@ set foldmethod=syntax
 set foldcolumn=1
 set foldlevelstart=99
 let javaScript_fold=1
+
+nnoremap zz  
+
+function! ToogleFold()
+     if &foldlevel >= 20
+         "normal! zM<CR> (folds all)
+         set foldlevel=0
+     else
+         "normal! zR<CR> (unfolds everything)
+         set foldlevel=20
+     endif
+ endfunction
+
+" INDENT
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 
 " Use CTRL + hjkl in insert and command mode
 inoremap <C-h> <Left>
@@ -111,6 +136,33 @@ vnoremap <M-j> :m'>+<CR>gv=gv
 vnoremap <M-k> :m-2<CR>gv=gv
 vnoremap <M-h> <gv
 vnoremap <M-l> >gv"kMove lines with CTRL SHIFT J/K in v/i/n modes
+
+"Mnemonic: Copy File path
+nor <leader>cf :let @*=expand("%:p")<CR>    
+
+"Mnemonic: Yank File path
+nnor <leader>yf :let @"=expand("%:p")<CR>   
+
+"Mnemonic: yank File Name
+nnor <leader>fn :let @"=expand("%")<CR>     
+
+" TABS KILLER FEATURES
+"
+map <leader>tt :tabnext<CR><CR>
+map <leader>tp :tabprevious<CR><CR>
+
+map <leader>O :let @"=expand("%")<CR>:tabnew | args <C-r>@ | vertical all | @=''<C-r>
+
+" map <leader>O :"ay<C-r>:tabnew | args <C-r>a | vertical all | @a=''<C-r>
+
+" map <leader><C-o> :tabnew | args %:p:h/* | vertical all
+
+
+" fun! OpenDirectory()
+"     call CmdLine('tabnew', 'args %:p:h/*', 'vertical all') 
+" endfun
+
+
 
 " in visual mode next selection with f 
 vnoremap <silent> <C-f> :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
@@ -283,6 +335,9 @@ function! SetupCommandAbbrs(from, to)
 autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 autocmd BufRead,BufNewFile *.{jsx} setlocal filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.{tsx} setlocal filetype=typescript.jsx
+
+" autocmd FileType html setlocal foldmethod=indent
+" autocmd FileType html setlocal fdl=3
 
 
 " commenting 
