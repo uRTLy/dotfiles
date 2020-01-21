@@ -1,40 +1,41 @@
-"" PLUGINS
+"" plugins
 call plug#begin('~/.vim/plugged')
 
+" js/ts  extensions
+plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': './install.sh'}
+plug 'leafgarland/typescript-vim'
+plug 'peitalin/vim-jsx-typescript'
+plug 'posva/vim-vue'
+plug 'mxw/vim-jsx'
+plug 'suy/vim-context-commentstring'
+plug 'sillybun/vim-repl'
 
-" JS/TS  extensions
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': './install.sh'}
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'posva/vim-vue'
-Plug 'mxw/vim-jsx'
-Plug 'suy/vim-context-commentstring'
-Plug 'sillybun/vim-repl'
+plug 'shougo/vimproc.vim', { 'do': 'make'}
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make'}
-
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-apathy'
-
-
-Plug 'dunstontc/vim-vscode-theme'
-
-"" THEME
-Plug 'tomasiser/vim-code-dark'
-
-" Searching
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'NLKNguyen/papercolor-theme'
+plug 'tpope/vim-vinegar'
+plug 'tpope/vim-fugitive'
+plug 'tpope/vim-commentary'
+plug 'tpope/vim-apathy'
+plug 'doums/darcula'
 
 
-" Sessions
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
+
+"" theme
+plug 'dunstontc/vim-vscode-theme'
+plug 'tomasiser/vim-code-dark'
+plug 'tomasiser/vim-code-dark'
+plug 'nlknguyen/papercolor-theme'
+plug 'dracula/vim', { 'as': 'dracula' }
+
+" searching
+plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+plug 'junegunn/fzf.vim'
+plug 'vim-airline/vim-airline'
+
+
+" sessions
+plug 'xolox/vim-misc'
+plug 'xolox/vim-session'
 
 call plug#end()
 
@@ -42,73 +43,73 @@ let mapleader = ","
 
 let g:airline_theme = 'codedark'
 
-" NETRW overrides
+" netrw overrides
 "
 " let g:netrw_localrmdir='rm -r'
-let g:netrw_localrmdir='mv PATH_TO_YOUR/Trash'
-let g:netrw_localrmdir_cmd='mv PATH_TO_YOUR/Trash'
+let g:netrw_localrmdir='mv path_to_your/trash'
+let g:netrw_localrmdir_cmd='mv path_to_your/trash'
 
 
-"THEME
+"theme
 set background=light
 set termguicolors
 
-set t_Co=256
-colorscheme PaperColor 
-set guifont=Menlo:h13
+set t_co=256
+colorscheme papercolor 
+set guifont=menlo:h13
 
 set mouse=a
 
 set number
 set relativenumber
 set cursorline
-hi Search cterm=none ctermfg=grey ctermbg=blue
+hi search cterm=none ctermfg=grey ctermbg=blue
 
 " quick save
-noremap <S-s> :w!<cr>
+noremap <s-s> :w!<cr>
 
 "basic mappings
 noremap k gk
 noremap j gj
 
-nnoremap E $
-nnoremap B 0
+nnoremap e $
+nnoremap b 0
 nnoremap $ <nop>
-nnoremap Y y$ 
-nnoremap D d$
+nnoremap y y$ 
+nnoremap d d$
 
 "folding
 set foldmethod=syntax
 set foldcolumn=1
 set foldlevelstart=99
-let javaScript_fold=1
+let javascript_fold=1
 
 nnoremap zz  
 
-function! ToogleFold()
+function! tooglefold()
      if &foldlevel >= 20
-         "normal! zM<CR> (folds all)
+         "normal! zm<cr> (folds all)
          set foldlevel=0
      else
-         "normal! zR<CR> (unfolds everything)
+         "normal! zr<cr> (unfolds everything)
          set foldlevel=20
      endif
  endfunction
 
-" INDENT
+" indent
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 
-" Use CTRL + hjkl in insert and command mode
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-cnoremap <C-h> <Left>
-cnoremap <C-j> <Down>
-cnoremap <C-k> <Up>
-cnoremap <C-l> <Right>
+" use ctrl + hjkl in insert and command mode
+inoremap <c-h> <left>
+inoremap <c-j> <down>
+inoremap <c-k> <up>
+inoremap <c-l> <right>
+cnoremap <c-h> <left>
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+cnoremap <c-l> <right>
 
 
 if has("mac")
@@ -123,56 +124,56 @@ if has("mac")
 endif
 
 
-" move a line of text using ALT+[jk], indent with ALT+[hl]
-nnoremap <M-j> :m+<CR>==
-nnoremap <M-k> :m-2<CR>==
-nnoremap <M-h> <<
-nnoremap <M-l> >>
-inoremap <M-j> <Esc>:m+<CR>==gi
-inoremap <M-k> <Esc>:m-2<CR>==gi
-inoremap <M-h> <Esc><<`]a
-inoremap <M-l> <Esc>>>`]a
-vnoremap <M-j> :m'>+<CR>gv=gv
-vnoremap <M-k> :m-2<CR>gv=gv
-vnoremap <M-h> <gv
-vnoremap <M-l> >gv"kMove lines with CTRL SHIFT J/K in v/i/n modes
+" move a line of text using alt+[jk], indent with alt+[hl]
+nnoremap <m-j> :m+<cr>==
+nnoremap <m-k> :m-2<cr>==
+nnoremap <m-h> <<
+nnoremap <m-l> >>
+inoremap <m-j> <esc>:m+<cr>==gi
+inoremap <m-k> <esc>:m-2<cr>==gi
+inoremap <m-h> <esc><<`]a
+inoremap <m-l> <esc>>>`]a
+vnoremap <m-j> :m'>+<cr>gv=gv
+vnoremap <m-k> :m-2<cr>gv=gv
+vnoremap <m-h> <gv
+vnoremap <m-l> >gv"kmove lines with ctrl shift j/k in v/i/n modes
 
-"Mnemonic: Copy File path
-nor <leader>cf :let @*=expand("%:p")<CR>    
+"mnemonic: copy file path
+nor <leader>cf :let @*=expand("%:p")<cr>    
 
-"Mnemonic: Yank File path
-nnor <leader>yf :let @"=expand("%:p")<CR>   
+"mnemonic: yank file path
+nnor <leader>yf :let @"=expand("%:p")<cr>   
 
-"Mnemonic: yank File Name
-nnor <leader>fn :let @"=expand("%")<CR>     
+"mnemonic: yank file name
+nnor <leader>fn :let @"=expand("%")<cr>     
 
-" TABS KILLER FEATURES
+" tabs killer features
 "
-map <leader>tt :tabnext<CR><CR>
-map <leader>tp :tabprevious<CR><CR>
+map <leader>tt :tabnext<cr><cr>
+map <leader>tp :tabprevious<cr><cr>
 
-map <leader>O :let @"=expand("%")<CR>:tabnew | args <C-r>@ | vertical all | @=''<C-r>
+" map <leader>o :let @"=expand("%")<cr>:tabnew | args <c-r>@ | vertical all | @=''<c-r>
 
-" map <leader>O :"ay<C-r>:tabnew | args <C-r>a | vertical all | @a=''<C-r>
+" map <leader>o :"ay<c-r>:tabnew | args <c-r>a | vertical all | @a=''<c-r>
 
-" map <leader><C-o> :tabnew | args %:p:h/* | vertical all
+" map <leader><c-o> :tabnew | args %:p:h/* | vertical all
 
 
-" fun! OpenDirectory()
-"     call CmdLine('tabnew', 'args %:p:h/*', 'vertical all') 
+" fun! opendirectory()
+"     call cmdline('tabnew', 'args %:p:h/*', 'vertical all') 
 " endfun
 
 
 
 " in visual mode next selection with f 
-vnoremap <silent> <C-f> :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> <C-F> :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>l
+vnoremap <silent> <c-f> :<c-u>call visualselection('', '')<cr>/<c-r>=@/<cr><cr>
+vnoremap <silent> <c-f> :<c-u>call visualselection('', '')<cr>?<c-r>=@/<cr><cr>l
 
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" use leader X to select all occurences and replace 
-nmap <Leader>x *``cgn
-nmap <Leader>X #``cgN
+" use leader x to select all occurences and replace 
+nmap <leader>x *``cgn
+nmap <leader>x #``cgn
 
 " visual mode maps
 
@@ -194,20 +195,20 @@ inoremap '7 <><esc>i
 
 inoremap jk <esc>
 
-" Search improvements
+" search improvements
 nnoremap n nzz
-nnoremap N Nzz
+nnoremap n nzz
 nnoremap * *zz
 nnoremap # #zz
 noremap g* g*zz
 nnoremap g# g#zz
 
 " select all
-nnoremap vA ggVG
+nnoremap va ggvg
 
 " add new line below without entering insert mode
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
+nmap <s-enter> o<esc>
+nmap <cr> o<esc>
 
 " plugins settings
 
@@ -224,25 +225,25 @@ set sessionoptions-=options
 
 
 """"""""fzf"""""""""
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+let $fzf_default_command = 'rg --files --hidden'
 
-nnoremap <silent> <c-f> :Rg<cr>
-nnoremap <silent> <c-g> :GFiles<cr>
-nnoremap <silent> <c-d> :Lines<cr>
-nnoremap <silent> <c-a> :Files<cr>
-nnoremap <silent> <c-p> :Commands<cr> 
+nnoremap <silent> <c-f> :rg<cr>
+nnoremap <silent> <c-g> :gfiles<cr>
+nnoremap <silent> <c-d> :lines<cr>
+nnoremap <silent> <c-a> :files<cr>
+nnoremap <silent> <c-p> :commands<cr> 
 
 
 
-""""""""GIT FLOW (fugitive)"""""""""
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gr :Gread<CR>
-nnoremap <Leader>gw :Gwrite<CR>
-nnoremap <Leader>gp :Git push<CR>
-nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
-nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
+""""""""git flow (fugitive)"""""""""
+nnoremap <leader>gs :gstatus<cr>
+nnoremap <leader>gd :gdiff<cr>
+nnoremap <leader>gb :gblame<cr>
+nnoremap <leader>gr :gread<cr>
+nnoremap <leader>gw :gwrite<cr>
+nnoremap <leader>gp :git push<cr>
+nnoremap <leader>g- :silent git stash<cr>:e<cr>
+nnoremap <leader>g+ :silent git stash pop<cr>:e<cr>
 
 """""""coc"""""""""
 
@@ -265,43 +266,43 @@ let g:coc_global_extensions = [
   \ 'coc-vetur'
   \ ]
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+inoremap <silent><expr> <tab>
+      \ pumvisible() ? "\<c-n>" :
+      \ <sid>check_back_space() ? "\<tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<c-h>"
 
-" Use <c-space> for trigger completion.
+" use <c-space> for trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" use <cr> for confirm completion, `<c-g>u` means break undo chain at current position.
+" coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+" use `[c` and `]c` for navigate diagnostics
+nmap <silent> [c <plug>(coc-diagnostic-prev)
+nmap <silent> ]c <plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+" remap keys for gotos
+nmap <silent> gd <plug>(coc-definition)
+nmap <silent> gy <plug>(coc-type-definition)
+nmap <silent> gi <plug>(coc-implementation)
+nmap <silent> gr <plug>(coc-references)
 
 " pasting
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>y "+y
+noremap <leader>p "+p
 
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> k :call <sid>show_documentation()<cr>
 
 function! s:show_documentation()
   if &filetype == 'vim'
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call cocaction('dohover')
   endif
 endfunction
 
@@ -325,44 +326,44 @@ au bufreadpost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 
 " expand on enter
-function! SetupCommandAbbrs(from, to)
+function! setupcommandabbrs(from, to)
       exec 'cnoreabbrev <expr> '.a:from
               \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
               \ .'? ("'.a:to.'") : ("'.a:from.'"))'
   endfunction
 
-" FILETYPES 
-autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
-autocmd BufRead,BufNewFile *.{jsx} setlocal filetype=javascript.jsx
-autocmd BufRead,BufNewFile *.{tsx} setlocal filetype=typescript.jsx
+" filetypes 
+autocmd bufreadpost,bufnewfile *.vue setlocal filetype=vue
+autocmd bufread,bufnewfile *.{jsx} setlocal filetype=javascript.jsx
+autocmd bufread,bufnewfile *.{tsx} setlocal filetype=typescript.jsx
 
-" autocmd FileType html setlocal foldmethod=indent
-" autocmd FileType html setlocal fdl=3
+" autocmd filetype html setlocal foldmethod=indent
+" autocmd filetype html setlocal fdl=3
 
 
 " commenting 
 let g:context#commentstring#table['javascript.jsx'] = {
-			\ 'jsComment' : '// %s',
-			\ 'jsImport' : '// %s',
-			\ 'jsxStatment' : '// %s',
-			\ 'jsxRegion' : '{/*%s*/}',
-			\ 'jsxTag' : '{/*%s*/}',
+			\ 'jscomment' : '// %s',
+			\ 'jsimport' : '// %s',
+			\ 'jsxstatment' : '// %s',
+			\ 'jsxregion' : '{/*%s*/}',
+			\ 'jsxtag' : '{/*%s*/}',
 			\}
 
 let g:context#commentstring#table['typescript.jsx'] = {
-			\ 'jsComment' : '// %s',
-			\ 'jsImport' : '// %s',
-			\ 'jsxStatment' : '// %s',
-			\ 'jsxRegion' : '{/*%s*/}',
-			\ 'jsxTag' : '{/*%s*/}',
+			\ 'jscomment' : '// %s',
+			\ 'jsimport' : '// %s',
+			\ 'jsxstatment' : '// %s',
+			\ 'jsxregion' : '{/*%s*/}',
+			\ 'jsxtag' : '{/*%s*/}',
 			\}
 
 
 let g:context#commentstring#table['vue'] = {
-			\ 'jsComment' : '// %s',
-			\ 'jsImport' : '// %s',
-			\ 'jsxStatment' : '// %s',
-			\ 'jsxRegion' : '{/*%s*/}',
-			\ 'jsxTag' : '{/*%s*/}',
+			\ 'jscomment' : '// %s',
+			\ 'jsimport' : '// %s',
+			\ 'jsxstatment' : '// %s',
+			\ 'jsxregion' : '{/*%s*/}',
+			\ 'jsxtag' : '{/*%s*/}',
 			\}
 
