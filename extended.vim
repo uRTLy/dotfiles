@@ -3,10 +3,11 @@ call plug#begin('~/.vim/plugged')
 
 
 " JS/TS  extensions
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': './install.sh'}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+"
+Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': './install.sh'}
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'posva/vim-vue'
 Plug 'mxw/vim-jsx'
 Plug 'suy/vim-context-commentstring'
 Plug 'sillybun/vim-repl'
@@ -18,6 +19,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-apathy'
 
+Plug 'elixir-editors/vim-elixir'
 
 Plug 'dunstontc/vim-vscode-theme'
 
@@ -45,8 +47,8 @@ let g:airline_theme = 'codedark'
 " NETRW overrides
 "
 " let g:netrw_localrmdir='rm -r'
-let g:netrw_localrmdir='mv PATH_TO_YOUR/Trash'
-let g:netrw_localrmdir_cmd='mv PATH_TO_YOUR/Trash'
+let g:netrw_localrmdir='mv ~/.Trash' 
+" let g:netrw_localrmdir_cmd='mv PATH_TO_YOUR/Trash'
 
 
 "THEME
@@ -151,7 +153,7 @@ nnor <leader>fn :let @"=expand("%")<CR>
 map <leader>tt :tabnext<CR><CR>
 map <leader>tp :tabprevious<CR><CR>
 
-map <leader>O :let @"=expand("%")<CR>:tabnew | args <C-r>@ | vertical all | @=''<C-r>
+" map <leader>O :let @"=expand("%")<CR>:tabnew | args <C-r>@ | vertical all | @=''<C-r>
 
 " map <leader>O :"ay<C-r>:tabnew | args <C-r>a | vertical all | @a=''<C-r>
 
@@ -332,12 +334,9 @@ function! SetupCommandAbbrs(from, to)
   endfunction
 
 " FILETYPES 
-autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
+" autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
 autocmd BufRead,BufNewFile *.{jsx} setlocal filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.{tsx} setlocal filetype=typescript.jsx
-
-" autocmd FileType html setlocal foldmethod=indent
-" autocmd FileType html setlocal fdl=3
 
 
 " commenting 
@@ -365,4 +364,5 @@ let g:context#commentstring#table['vue'] = {
 			\ 'jsxRegion' : '{/*%s*/}',
 			\ 'jsxTag' : '{/*%s*/}',
 			\}
+
 
