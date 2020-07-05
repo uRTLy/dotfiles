@@ -1,17 +1,31 @@
 {
-  "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "vue", "javascript", "typescript", "typescriptreact", "json", "javascriptreact", "html", "css"],
-  "typescript.suggest.autoImports": true ,  
+  "prettier.eslintIntegration": true,
+  "typescript.format.enabled": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "elixir",
+    "eelixir",
+    "vue",
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "html",
+    "css"
+  ],
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.paths": true,
+  "typescript.updateImportsOnFileMove.enable": true,
+  "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
+  "typescript.suggest.completeFunctionCalls": false,
   "typescript.preferences.importModuleSpecifier": "auto",
   "emmet.includeLanguages": {
     "eelixir": "html",
-    "vue-html": "html", 
+    "vue-html": "html",
     "javascriptreact": "javascriptreact",
     "typescriptreact": "javascriptreact"
   },
-  "vetur.useWorkspaceDependencies": true,
-  "vetur.experimental.templateInterpolationService": true
+  "tsserver.formatOnType": true,
+  "coc.preferences.formatOnType": true,
+  "prettier.disableSuccessMessage": true
 }
-
-

@@ -5,12 +5,15 @@ call plug#begin('~/.vim/plugged')
 " JS/TS  extensions
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 "
-Plug 'neoclide/coc.nvim', { 'branch': 'master', 'do': './install.sh'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': './install.sh'}
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'mxw/vim-jsx'
+Plug 'kevinoid/vim-jsonc'
 Plug 'suy/vim-context-commentstring'
 Plug 'sillybun/vim-repl'
+Plug 'dylanaraps/wal'
+Plug 'jparise/vim-graphql'
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 
@@ -57,7 +60,8 @@ set termguicolors
 
 set t_Co=256
 colorscheme PaperColor 
-set guifont=Menlo:h13
+" colorscheme wal 
+set guifont=JetBrains\ Mono\ 13
 
 set mouse=a
 
@@ -68,6 +72,10 @@ hi Search cterm=none ctermfg=grey ctermbg=blue
 
 " quick save
 noremap <S-s> :w!<cr>
+
+inoremap <C-c> <Esc><Esc>
+inoremap <C-c> <ESC>
+
 
 "basic mappings
 noremap k gk
@@ -136,8 +144,9 @@ inoremap <M-h> <Esc><<`]a
 inoremap <M-l> <Esc>>>`]a
 vnoremap <M-j> :m'>+<CR>gv=gv
 vnoremap <M-k> :m-2<CR>gv=gv
+"kMove lnes with CTRL SHIFT J/K in v/i/n modes
+vnoremap <M-l> >gv
 vnoremap <M-h> <gv
-vnoremap <M-l> >gv"kMove lines with CTRL SHIFT J/K in v/i/n modes
 
 "Mnemonic: Copy File path
 nor <leader>cf :let @*=expand("%:p")<CR>    
@@ -211,6 +220,7 @@ nnoremap vA ggVG
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
+
 " plugins settings
 
 " """"""sessions"""""""""
@@ -226,7 +236,8 @@ set sessionoptions-=options
 
 
 """"""""fzf"""""""""
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+
+let $FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 nnoremap <silent> <c-f> :Rg<cr>
 nnoremap <silent> <c-g> :GFiles<cr>
@@ -253,7 +264,6 @@ let g:coc_global_extensions = [
   \ 'coc-python',
   \ 'coc-docker',
   \ 'coc-yaml',
-  \ 'coc-yaml',
   \ 'coc-html',
   \ 'coc-css',
   \ 'coc-tsserver',
@@ -267,28 +277,52 @@ let g:coc_global_extensions = [
   \ 'coc-vetur'
   \ ]
 
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" Navigate snippet placeholders using tab
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use enter to accept snippet expansion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" " Use <c-space> for trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
+
+" " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+nmap <leader>do <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
 
 " pasting
 noremap <Leader>y "*y
@@ -297,15 +331,30 @@ noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call CocAction('doHover')<CR>
 
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
+
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#util#has_float() == 0)
+    silent call CocActionAsync('doHover')
   endif
 endfunction
+
+function! s:show_hover_doc()
+  call timer_start(370, 'ShowDocIfNoDiagnostic')
+endfunction
+
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()
+
+" function! s:show_documentation()
+"   if &filetype == 'vim'
+"     execute 'h '.expand('<cword>')
+"   else
+"     call CocAction('doHover')
+"   endif
+" endfunction
 
 
 "e <tab> for trigger completion and navigate to next complete item
