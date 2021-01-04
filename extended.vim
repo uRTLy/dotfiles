@@ -1,5 +1,3 @@
-
-
  " PLUGINS
 call plug#begin('~/.vim/plugged')
 

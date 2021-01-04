@@ -1,31 +1,76 @@
 {
-  "prettier.eslintIntegration": true,
+  "angular.log": "normal",
+
+   // ELIXIR
+  "elixir.enable": true,
+  "elixirLS.dialyzerEnabled": true,
+  "elixirLS.dialyzerFormat": "dialyzer",
+
+  // TYPESCRIPT
   "typescript.format.enabled": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "elixir",
-    "eelixir",
-    "vue",
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "html",
-    "css"
-  ],
-  "typescript.suggest.autoImports": true,
+  "tsserver.formatOnType": true,
   "typescript.suggest.paths": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "auto",
   "typescript.updateImportsOnFileMove.enable": true,
   "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
   "typescript.suggest.completeFunctionCalls": false,
-  "typescript.preferences.importModuleSpecifier": "auto",
+
+
+
+  // COC
+  "coc.preferences.enableFloatHighlight": false,
+  "coc.source.floaterm.enable": false, 
+  "tailwindCSS.emmetCompletions": true,
   "emmet.includeLanguages": {
     "eelixir": "html",
     "vue-html": "html",
+    "eruby": "html",
     "javascriptreact": "javascriptreact",
     "typescriptreact": "javascriptreact"
   },
-  "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true,
-  "prettier.disableSuccessMessage": true
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".hg",
+    ".projections.json",
+    ".gitignore",
+    "package.json",
+    "tsconfig.base.json"
+  ],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "vue",
+    "javascript",
+    "typescript",
+    "json",
+    "typescriptreact",
+    "javascriptreact",
+    "html",
+    "css",
+    "scss",
+    "sass",
+    "less"
+  ],
+  "tailwindCSS.htmlLanguages": [
+    "html",
+    "blade",
+    "edge",
+    "ejs",
+    "elm",
+    "erb",
+    "eruby",
+    "haml",
+    "handlebars",
+    "html.twig",
+    "jade",
+    "leaf",
+    "markdown",
+    "njk",
+    "nunjucks",
+    "php",
+    "razor",
+    "slim",
+    "svelte",
+    "twig",
+    "vue"
+  ]
 }
