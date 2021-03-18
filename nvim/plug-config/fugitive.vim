@@ -1,9 +1,9 @@
 """"""""GIT FLOW (fugitive)"""""""""
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
-nnoremap <Leader>gb :Gblame<CR>
-nnoremap <Leader>gr :Gread<CR>
-nnoremap <Leader>gw :Gwrite<CR>
-nnoremap <Leader>gp :Git push<CR>
-nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
-nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gr :Gread<CR>
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>gp :Git push<CR>
+nnoremap <leader>g- :Silent Git stash<CR>:e<CR>
+nnoremap <leader>g+ :Silent Git stash pop<CR>:e<CR>

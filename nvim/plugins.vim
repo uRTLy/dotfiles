@@ -1,10 +1,9 @@
 call plug#begin('~/.vim/plugged')
-Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+" Plug 'neoclide/coc.nvim', { 'branch': 'release'}
 
-" JS/TS  extensions
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
 " Test
 Plug 'vim-test/vim-test'
@@ -12,10 +11,10 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make'}
 Plug 'puremourning/vimspector'
 Plug 'kassio/neoterm'
 
-" Debug
-Plug 'sillybun/vim-repl'
+" Debug Plug
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-telescope/telescope-dap.nvim' 
 
 " TS / JS 
 Plug 'leafgarland/typescript-vim'
@@ -26,16 +25,24 @@ Plug 'kevinoid/vim-jsonc'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-apathy'
+
+" File Tree 
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+
 " Git
 Plug 'tpope/vim-fugitive'
 
-""" THEME
+" THEME
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'
 
-"" Searching
+" Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
@@ -55,8 +62,4 @@ nnoremap <silent> <c-d> :Lines<cr>
 nnoremap <silent> <c-a> :Files<cr>
 nnoremap <silent> <c-p> :Commands<cr> 
 
-""""""""IMPORTS"""""""""
-source ~/dotfiles/nvim/plug-config/coc.vim
-source ~/dotfiles/nvim/plug-config/lsp-config.vim
-source ~/dotfiles/nvim/plug-config/fugitive.vim
 

@@ -1,20 +1,29 @@
-" leader is ,
-let mapleader = ","
-
 "" Set working directory
-nnoremap <Leader>. :lcd %:p:h<CR>
-map <Leader>cd :cd %:p:h<cr>:pwd<cr>
+nnoremap <leader>. :lcd %:p:h<CR>
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+noremap <leader>p "+gP<CR>
 
 " use leader X to select all occurences and replace 
-nmap <Leader>x *``cgn
-nmap <Leader>X #``cgN
+nmap <leader>x *``cgn
+nmap <leader>X #``cgN
 
 "Mnemonic: Copy File path
-nor <Leader>cf :let @*=expand("%:p")<CR>    
+nor <leader>cf :let @*=expand("%:p")<CR>    
 "Mnemonic: Yank File path
-nnor <Leader>yf :let @"=expand("%:p")<CR>   
+nnor <leader>yf :let @"=expand("%:p")<CR>   
 "Mnemonic: yank File Name
-nnor <Leader>fn :let @"=expand("%")<CR>
+nnor <leader>fn :let @"=expand("%")<CR>
+
+" pasting
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>Y "+y
+noremap <leader>P "+p
+
+"" Split
+noremap <leader>h :<C-u>split<CR>
+noremap <leader>v :<C-u>vsplit<CR>
 
 "basic mappings
 noremap k gk
@@ -59,7 +68,6 @@ inoremap '5 []<esc>i
 inoremap '6 {<esc>o}<esc>o
 inoremap '7 <><esc>i
 
-
 " select all
 nnoremap vA ggVG
 nnoremap zz  
@@ -84,11 +92,10 @@ inoremap <M-h> <Esc><<`]a
 inoremap <M-l> <Esc>>>`]a
 vnoremap <M-j> :m'>+<CR>gv=gv
 vnoremap <M-k> :m-2<CR>gv=gv
-"kMove lnes with CTRL SHIFT J/K in v/i/n modes
+
+"Move lnes with CTRL SHIFT J/K in v/i/n modes
 vnoremap <M-l> >gv
 vnoremap <M-h> <gv
-
-
 
 "" Copy/Paste/Cut
 if has('unnamedplus')
@@ -96,22 +103,11 @@ if has('unnamedplus')
 endif
 
 noremap YY "+y<CR>
-noremap <Leader>p "+gP<CR>
 noremap XX "+x<CR>
 
 "" Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-" pasting
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
-
-"" Split
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
 
 "" Tabd
 nnoremap <Tab> gt
