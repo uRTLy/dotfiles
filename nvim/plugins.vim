@@ -62,4 +62,7 @@ nnoremap <silent> <c-d> :Lines<cr>
 nnoremap <silent> <c-a> :Files<cr>
 nnoremap <silent> <c-p> :Commands<cr> 
 
+""""""""VIM-TEST"""""""""
+let test#strategy = "neovim"
+let test#neovim#term_position = "vertical"
 

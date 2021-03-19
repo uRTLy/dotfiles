@@ -1,1 +1,0 @@
---     program = '${rootDir}/node_modules/bin/jest',
