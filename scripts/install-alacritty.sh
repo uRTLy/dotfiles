@@ -6,6 +6,10 @@
 # Install required tools
 sudo apt-get install -y cmake libfreetype6-dev libfontconfig1-dev xclip
 
+curl https://sh.rustup.rs -sSf | sh
+rustup override set stable
+rustup update stable
+
 # Download, compile and install Alacritty
 git clone https://github.com/jwilm/alacritty
 cd alacritty

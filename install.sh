@@ -1,2 +1,2 @@
 sudo apt update
-sh ./scripts/install-alacrity-ubuntu.sh
+sh ./scripts/install-alacritty.sh
