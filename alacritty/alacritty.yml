@@ -1,6 +1,7 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 env:
   TERM: xterm-256color
+  EDITOR: nvim
 window:
   dimensions:
     columns: 80
@@ -9,6 +10,8 @@ shell:
   program: /usr/bin/zsh
   args:
     - --login
+    - -c
+    - "tmux" 
 
 selection:
  save_to_clipboard: true
