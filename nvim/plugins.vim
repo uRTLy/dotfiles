@@ -4,6 +4,8 @@ call plug#begin('~/.vim/plugged')
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " Test
 Plug 'vim-test/vim-test'
@@ -44,10 +46,17 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+
+" Tabs
+Plug 'christoomey/vim-tmux-navigator'
+
+
 call plug#end()
 
 """"""""NERDTree"""""""""
 let g:NERDTreeWinSize=67
+let g:NERDTreeMapJumpNextSibling = '<Nop>'
+let g:NERDTreeMapJumpPrevSibling = '<Nop>'
 
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 nnoremap <silent> -  :NERDTreeToggle<CR>
@@ -65,4 +74,11 @@ nnoremap <silent> <c-p> :Commands<cr>
 """"""""VIM-TEST"""""""""
 let test#strategy = "neovim"
 let test#neovim#term_position = "vertical"
+
+""""""""TMUX"""""""""
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
