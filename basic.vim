@@ -38,8 +38,6 @@ filetype plugin on
 filetype indent on
 
 " Set to auto read when a file is changed from the outside
-set autoread
-au FocusGained,BufEnter * checktime
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -62,8 +60,6 @@ set so=7
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en' 
 set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
 
 " Turn on the Wild menu
 set wildmenu
@@ -124,7 +120,7 @@ if has("gui_macvim")
 endif
 
 
-" Add a bit extra margin to the left
+" add a bit extra margin to the left
 set foldcolumn=1
 
 

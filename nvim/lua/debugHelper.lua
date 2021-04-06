@@ -1,8 +1,4 @@
--- local program = '${rootDir}/node_modules/bin/jest'
--- local program = HOME .. '/.nvm/versions/node/v12.16.3/bin/ts-jest'
 local HOME = os.getenv('HOME')
-local program = '/node_modules/ts-jest'
-
 local dap = require('dap')
 
 dap.adapters.node2 = {
@@ -14,33 +10,99 @@ dap.adapters.node2 = {
 vim.fn.sign_define('DapBreakpoint', {text='🟥', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='🟢', texthl='', linehl='', numhl=''})
 
+vim.g.dap_virtual_text = 'all frames'
+
+dap.adapters.ruby = {
+  type = 'executable';
+  command = 'bundle';
+  args = {'exec', 'readapt', 'stdio'};
+}
+
+
+dap.configurations.ruby = {
+  {
+    type = 'ruby';
+    request = 'launch';
+    name = 'Rails';
+    program = 'bundle';
+    programArgs = {'exec', 'rails', 's'};
+    useBundler = true;
+    console = 'integratedTerminal';
+  },
+}
+
+dap.configurations.node = {
+  {
+      name = 'Jest',
+      type = 'node2',
+      request = 'launch',
+      cwd = '${workspaceFolder}',
+      program = '${workspaceFolder}/node_modules/.bin/jest',
+      args = {
+      '--testPathPattern',
+      '${file}', 
+      '--runInBand',
+      },
+      sourceMaps = true,
+      console = 'integratedTerminal',
+      skipFiles = {'<node_internals>/**/*.js'},
+}
+}
+
+
 function debugJest(testName, filename)
-  print("starting " .. testName .. " with file " .. filename)
   dap.run({
       type = 'node2',
       request = 'launch',
-      cwd = vim.fn.getcwd(),
-      runtimeArgs = {'--inspect-brk', '/usr/local/bin/ts-jest', '--no-coverage', '-t', testName, '--', filename},
+      cwd = '${workspaceFolder}',
+      program = '${workspaceFolder}/node_modules/.bin/jest',
+      args = {
+      '--testPathPattern',
+      filename, 
+      '-t',
+      testName,
+      '--runInBand',
+      },
       sourceMaps = true,
-      protocol = 'inspector',
-      skipFiles = {'<node_internals>/**/*.js'},
       console = 'integratedTerminal',
-      port = 9229,
+      skipFiles = {'<node_internals>/**/*.js'},
       })
 end
 
-function debugNX(testName, filename)
-  print("starting " .. testName .. " with file " .. filename)
+function debugNX()
   dap.run({
       type = 'node2',
       request = 'launch',
-      cwd = vim.fn.getcwd(),
-      runtimeArgs = {'--inspect-brk', '/usr/local/bin/ts-jest', '--no-coverage', '-t', testName, '--', filename},
+      cwd = '${workspaceFolder}',
+      program = '${workspaceFolder}/node_modules/.bin/jest',
+      args = {
+      '--testPathPattern',
+      '${file}',
+      '--runInBand',
+      },
+      sourceMaps = true,
+      console = 'integratedTerminal',
+      skipFiles = {'<node_internals>/**/*.js'},
+      })
+end
+
+
+function debugNodeApp()
+  print("starting node app")
+  dap.run({
+      type = 'node2',
+      port = 9229,
+      request = 'attach',
+      name = 'Debug medondo server',
+      console = 'integratedTerminal',
+      restart = true,
       sourceMaps = true,
       protocol = 'inspector',
+      localRoot = '${workspaceFolder}/dist',
+      remoteRoot = '/home/node/app/dist',
+      cwd = '${workspaceFolder}/dist',
       skipFiles = {'<node_internals>/**/*.js'},
-      console = 'integratedTerminal',
-      port = 9229,
+      outFiles = { "${workspaceFolder}/dist/**/*.js"}
       })
 end
 
@@ -59,5 +121,6 @@ end
 return {
   debugJest = debugJest,
   debugNX = debugNX,
+  debugNodeApp = debugNodeApp,
   attach = attach,
 }

@@ -1,11 +1,26 @@
-"" PLUGINS
+ " PLUGINS
 call plug#begin('~/.vim/plugged')
 
 
 " JS/TS  extensions
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-"
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'puremourning/vimspector'
+
 Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': './install.sh'}
+Plug 'amiralies/coc-elixir', {'do': 'yarn install && yarn prepack'}
+Plug 'elixir-editors/vim-elixir'
+
+" Test
+Plug 'puremourning/vimspector'
+Plug 'Shougo/vimproc.vim', { 'do': 'make'}
+Plug 'vim-test/vim-test'
+Plug 'kassio/neoterm'
+Plug 'mfussenegger/nvim-dap'
+Plug 'theHamsta/nvim-dap-virtual-text'
+
+
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'mxw/vim-jsx'
@@ -15,33 +30,41 @@ Plug 'sillybun/vim-repl'
 Plug 'dylanaraps/wal'
 Plug 'jparise/vim-graphql'
 
-Plug 'Shougo/vimproc.vim', { 'do': 'make'}
+
 
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-apathy'
 
-Plug 'elixir-editors/vim-elixir'
 
+""" THEME
+Plug 'tomasiser/vim-code-dark'
 Plug 'dunstontc/vim-vscode-theme'
 
-"" THEME
-Plug 'tomasiser/vim-code-dark'
-
-" Searching
+"" Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'NLKNguyen/papercolor-theme'
 
-
-" Sessions
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-
 call plug#end()
+
+
+let g:test#strategy = "neoterm"
+let g:neoterm_default_mod = 'vert'
+let g:neoterm_autoscroll = 1      " autoscroll to the bottom when entering insert mode
+let g:neoterm_size = 80
+let g:neoterm_fixedsize = 1       " fixed size. The autosizing was wonky for me
+" let g:neoterm_keep_term_open = 0  
+"
+" let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+let g:vimspector_enable_mappings = 'HUMAN'
+
+" let test#strategy = "make"
+" let g:test#preserve_screen = 1
+
 
 let mapleader = ","
 
@@ -53,18 +76,8 @@ let g:airline_theme = 'codedark'
 let g:netrw_localrmdir='mv ~/.Trash' 
 " let g:netrw_localrmdir_cmd='mv PATH_TO_YOUR/Trash'
 
-
-"THEME
-set background=light
-set termguicolors
-
-set t_Co=256
-colorscheme PaperColor 
-" colorscheme wal 
-set guifont=JetBrains\ Mono\ 13
-
 set mouse=a
-
+set clipboard=unnamedplus
 set number
 set relativenumber
 set cursorline
@@ -220,19 +233,11 @@ nnoremap vA ggVG
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-
-" plugins settings
-
-" """"""sessions"""""""""
-let g:session_autoload = 'yes'
-let g:session_autosave = 'yes'
-let g:session_autosave_to = 'default'
-let g:session_autosave_periodic = 1 
-let g:session_default_to_last = 1
-let g:session_verbose_messages = 0
-:let g:session_persist_colors = 0
-let g:session_default_to_last = 1
-set sessionoptions-=options
+" session management
+let g:session_directory = "~/.vim/session"
+let g:session_autoload = "no"
+let g:session_autosave = "yes"
+let g:session_command_aliases = 1
 
 
 """"""""fzf"""""""""
@@ -244,8 +249,6 @@ nnoremap <silent> <c-g> :GFiles<cr>
 nnoremap <silent> <c-d> :Lines<cr>
 nnoremap <silent> <c-a> :Files<cr>
 nnoremap <silent> <c-p> :Commands<cr> 
-
-
 
 """"""""GIT FLOW (fugitive)"""""""""
 nnoremap <Leader>gs :Gstatus<CR>
@@ -260,6 +263,8 @@ nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
 """""""coc"""""""""
 
 let g:coc_global_extensions = [
+  \ 'coc-angular',
+  \ 'coc-tailwindcss',
   \ 'coc-json',
   \ 'coc-python',
   \ 'coc-docker',
@@ -288,6 +293,7 @@ inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Navigate snippet placeholders using tab
@@ -296,19 +302,6 @@ let g:coc_snippet_prev = '<S-Tab>'
 
 " Use enter to accept snippet expansion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" " Use <c-space> for trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
-
-" " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" " Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -319,8 +312,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-
-nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
 nmap <leader>do <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -330,15 +321,53 @@ noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
 
+"" Split
+noremap <Leader>h :<C-u>split<CR>
+noremap <Leader>v :<C-u>vsplit<CR>
+
+"" Tabd
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+nnoremap <silent> <S-t> :tabnew<CR>
+
+"" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>
+
+"" Vmap for maintain Visual Mode after shifting > and <
+vmap < <gv
+vmap > >gv
+
+"" Open current line on GitHub
+nnoremap <Leader>o :.Gbrowse<CR>
+
+"" Copy/Paste/Cut
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
+
+noremap YY "+y<CR>
+noremap <leader>p "+gP<CR>
+noremap XX "+x<CR>
+
+"" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+
+let g:NERDTreeWinSize=67
+
+nnoremap <silent> <F2> :NERDTreeFind<CR>
+nnoremap <silent> -  :NERDTreeToggle<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
 " nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> K :call CocAction('doHover')<CR>
 
 
 function! ShowDocIfNoDiagnostic(timer_id)
-  if (coc#util#has_float() == 0)
+  " if (coc#util#has_float() == 0)
     silent call CocActionAsync('doHover')
-  endif
+  " endif
 endfunction
 
 function! s:show_hover_doc()
@@ -363,7 +392,7 @@ function! s:check_back_space() abort
 	    return !col || getline('.')[col - 1]  =~ '\s'
     endfunction
 
-    inoremap <silent><expr> <tab>
+inoremap <silent><expr> <tab>
           \ pumvisible() ? "\<c-n>" :
           \ <sid>check_back_space() ? "\<tab>" :
           \ coc#refresh()
@@ -375,18 +404,7 @@ function! s:check_back_space() abort
 au bufreadpost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-" expand on enter
-function! SetupCommandAbbrs(from, to)
-      exec 'cnoreabbrev <expr> '.a:from
-              \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
-              \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-  endfunction
-
-" FILETYPES 
-" autocmd BufReadPost,BufNewFile *.vue setlocal filetype=vue
-autocmd BufRead,BufNewFile *.{jsx} setlocal filetype=javascript.jsx
-autocmd BufRead,BufNewFile *.{tsx} setlocal filetype=typescript.jsx
-
+command! -nargs=0 Format :call CocAction('format')
 
 " commenting 
 let g:context#commentstring#table['javascript.jsx'] = {
@@ -415,3 +433,55 @@ let g:context#commentstring#table['vue'] = {
 			\}
 
 
+function! MakeSession()
+  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  if (filewritable(b:sessiondir) != 2)
+    exe 'silent !mkdir -p ' b:sessiondir
+    redraw!
+  endif
+  let b:filename = b:sessiondir . '/session.vim'
+  exe "mksession! " . b:filename
+endfunction
+
+
+function! LoadSession()
+  let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+  let b:sessionfile = b:sessiondir . "/session.vim"
+  if (filereadable(b:sessionfile))
+    exe 'source ' b:sessionfile
+  else
+    echo "No session loaded."
+  endif
+endfunction
+
+" Adding automatons for when entering or leaving Vim
+au VimEnter * nested :call LoadSession()
+au VimLeave * :call MakeSession()
+
+" " test
+" nmap <silent> t<C-n> :TestNearest<CR>
+" nmap <silent> t<C-f> :TestFile<CR>
+" nmap <silent> t<C-s> :TestSuite<CR>
+" nmap <silent> t<C-l> :TestLast<CR>
+" nmap <silent> t<C-g> :TestVisit<CR>
+
+" theHamsta/nvim-dap-virtual-text and mfussenegger/nvim-dap
+let g:dap_virtual_text = v:true
+
+function! RunTestVerbose()
+  let g:test#javascript#jest#options = '' 
+  :TestNearest -strategy=neovim 
+  let g:test#javascript#jest#options = '--reporters jest-vim-reporter'
+endfunction
+
+" jank/vim-test and mfussenegger/nvim-dap
+nnoremap <leader>t :TestNearest -strategy=jest<CR>
+nnoremap <leader>tm :exec RunTestVerbose()<CR>
+
+function! JestStrategy(cmd)
+  let testName = matchlist(a:cmd, '\v -t ''(.*)''')[1]
+  let fileName = matchlist(a:cmd, '\v'' -- (.*)$')[1]
+  call luaeval("require'debugHelper'.debugJest([[" . testName . "]], [[" . fileName . "]])")
+endfunction      
+
+let g:test#custom_strategies = {'jest': function('JestStrategy')}

@@ -1,22 +1,23 @@
 call plug#begin('~/.vim/plugged')
-" Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release'}
 
-" LSP
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+" " LSP
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/vim-vsnip-integ'
 
 " Test
 Plug 'vim-test/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make'}
-Plug 'puremourning/vimspector'
 Plug 'kassio/neoterm'
 
 " Debug Plug
-Plug 'mfussenegger/nvim-dap'
-Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'nvim-telescope/telescope-dap.nvim' 
+Plug 'puremourning/vimspector'
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'theHamsta/nvim-dap-virtual-text'
+" Plug 'nvim-telescope/telescope-dap.nvim' 
 
 " TS / JS 
 Plug 'leafgarland/typescript-vim'
@@ -24,6 +25,10 @@ Plug 'mxw/vim-jsx'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'suy/vim-context-commentstring'
 Plug 'kevinoid/vim-jsonc'
+
+
+" elixir
+Plug 'elixir-editors/vim-elixir'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-apathy'
@@ -44,11 +49,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
+" Plug 'nvim-telescope/telescope.nvim'
 
 " Tabs
 Plug 'christoomey/vim-tmux-navigator'
+" Plug ""
 
 
 call plug#end()
@@ -72,8 +77,8 @@ nnoremap <silent> <c-a> :Files<cr>
 nnoremap <silent> <c-p> :Commands<cr> 
 
 """"""""VIM-TEST"""""""""
-let test#strategy = "neovim"
-let test#neovim#term_position = "vertical"
+" let test#strategy = "neovim"
+" let test#neovim#term_position = "vertical"
 
 """"""""TMUX"""""""""
 nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
@@ -81,4 +86,8 @@ nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+"""""""""TELESCOPE"""""""""
+":lua require('telescope').setup()
+":lua require('telescope').load_extension('dap')
 

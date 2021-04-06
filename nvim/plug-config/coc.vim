@@ -13,6 +13,7 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-highlight',
   \ 'coc-emmet',
+  \ 'coc-elixir',
   \ 'coc-snippets',
   \ 'coc-tslint-plugin',
   \ 'coc-eslint',
@@ -23,12 +24,16 @@ let g:coc_global_extensions = [
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use enter to accept snippet expansion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
