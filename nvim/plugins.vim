@@ -7,6 +7,9 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release'}
 " Plug 'hrsh7th/vim-vsnip'
 " Plug 'hrsh7th/vim-vsnip-integ'
 
+" CRYPTO
+Plug 'tomlion/vim-solidity'
+
 " Test
 Plug 'vim-test/vim-test'
 Plug 'Shougo/vimproc.vim', { 'do': 'make'}

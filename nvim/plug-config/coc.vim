@@ -1,5 +1,6 @@
 """""""coc"""""""""
 let g:coc_global_extensions = [
+  \ 'coc-flutter',
   \ 'coc-angular',
   \ 'coc-tailwindcss',
   \ 'coc-json',
