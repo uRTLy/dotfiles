@@ -18,7 +18,8 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-tslint-plugin',
   \ 'coc-eslint',
-  \ 'coc-vetur'
+  \ 'coc-vetur',
+  \ 'coc-prisma',
   \ ]
 
 " Navigate snippet placeholders using tab

@@ -12,6 +12,6 @@
 """"""""PLUGIN CONFIGS"""""""""
 source ~/dotfiles/nvim/plug-config/fugitive.vim
 source ~/dotfiles/nvim/plug-config/coc.vim
-source ~/dotfiles/nvim/plug-config/vimspector.vim
-" source ~/dotfiles/nvim/plug-config/nvim-dap.vim
+source ~/dotfiles/nvim/plug-config/nvim-dap.vim
+" source ~/dotfiles/nvim/plug-config/vimspector.vim
 " source ~/dotfiles/nvim/plug-config/lsp-config.vim

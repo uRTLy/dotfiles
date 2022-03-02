@@ -1,24 +1,25 @@
 call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', { 'branch': 'release'}
 
-" " LSP
+" LSP
 " Plug 'neovim/nvim-lspconfig'
 " Plug 'hrsh7th/nvim-compe'
 " Plug 'hrsh7th/vim-vsnip'
 " Plug 'hrsh7th/vim-vsnip-integ'
 
+Plug 'pantharshit00/vim-prisma'
+
 " CRYPTO
 Plug 'tomlion/vim-solidity'
 
-" Test
-Plug 'vim-test/vim-test'
-Plug 'Shougo/vimproc.vim', { 'do': 'make'}
-Plug 'kassio/neoterm'
-
 " Debug Plug
-Plug 'puremourning/vimspector'
-" Plug 'mfussenegger/nvim-dap'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'David-Kunz/jester'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'mfussenegger/nvim-dap'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+"Plug 'puremourning/vimspector'
 " Plug 'theHamsta/nvim-dap-virtual-text'
 " Plug 'nvim-telescope/telescope-dap.nvim' 
 
@@ -28,7 +29,6 @@ Plug 'mxw/vim-jsx'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'suy/vim-context-commentstring'
 Plug 'kevinoid/vim-jsonc'
-
 
 " elixir
 Plug 'elixir-editors/vim-elixir'

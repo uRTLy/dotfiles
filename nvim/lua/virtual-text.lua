@@ -1,3 +1,4 @@
+
 local virtual_text = {}
 
 virtual_text.show = true
