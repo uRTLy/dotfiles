@@ -1,45 +1,8 @@
 {
-  "typescript.format.enabled": true,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "elixir",
-    "eelixir",
-    "html-eex",
-    "html-leex",
-    "vue",
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "html",
-    "css"
-  ],
-  "tailwindCSS.jsLanguages": [
-    "javascript",
-    "javascriptreact",
-    "reason",
-    "typescriptreact"
-  ],
-  "tailwindCSS.emmetCompletions": true,
-  "typescript.suggest.autoImports": true,
-  "typescript.suggest.paths": true,
-  "typescript.updateImportsOnFileMove.enable": true,
-  "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
-  "typescript.suggest.completeFunctionCalls": false,
-  "typescript.preferences.importModuleSpecifier": "auto",
-  "emmet.includeLanguages": {
-    "eelixir": "html",
-    "html-eex": "html",
-    "html-leex": "html",
-    "vue-html": "html",
-    "javascriptreact": "javascriptreact",
-    "typescriptreact": "javascriptreact"
-  },
-  "tsserver.formatOnType": true,
-  "diagnostic.filetypeMap": {
-  "*.eex": "html-eex",
-  "*.leex": "html-eex"
-  },
-  "coc.preferences.formatOnType": true,
-  "prettier.disableSuccessMessage": true
+"coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "javascript.jsx", "erb", "html", "eruby"],
+"coc.preferences.messageLevel": "error",
+"emmet.includeLanguages": {
+  "eruby": "html",
+  "erb": "html"
+}
 }

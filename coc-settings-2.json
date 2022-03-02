@@ -1,8 +1,0 @@
-{
-"coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "javascript", "javascriptreact", "javascript.jsx", "erb", "html", "eruby"],
-"coc.preferences.messageLevel": "error",
-"emmet.includeLanguages": {
-  "eruby": "html",
-  "erb": "html"
-}
-}
